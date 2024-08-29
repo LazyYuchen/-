@@ -8,15 +8,15 @@ from docx import Document
 # 定义题目和答案
 questions_answers = {
     "1. 在光滑斜面上，放有物体X和物体Y，一根轻质绳将两个物体连接在一起。如图所示，将沿着斜面向上的力F作用在物体Y上。如果斜面倾角变大，绳的张力会有怎样的变化？A.不变 B.变小 C.变大": 
-    """正确答案是A不变。\n在θ不变的情况下对两个物块整体沿着斜面方向进行受力分析，再根据牛顿第二定律算出两个物块沿着斜面的共同加速度 F - (mX + mY)gsinθ = (mX + mY)a；
+    """正确答案是A不变。\n\n在θ不变的情况下对两个物块整体沿着斜面方向进行受力分析，再根据牛顿第二定律算出两个物块沿着斜面的共同加速度 F - (mX + mY)gsinθ = (mX + mY)a；
 然后再用隔离法研究物块X的受力情况，根据牛顿第二定律列出方程 F - mXgsinθ = mX a；带入共同加速度 a 可以算出绳的张力 F = mX / (mX + mY) * a。""",
     
     "2. 一木块置于光滑的水平桌面上，一根轻质绳绕过滑轮连接在木块上。一名男子用大小为10N的力向下拉动绳子，使得木块由静止开始向右运动（如左图），此时木块运动的加速度为 a左。现用质量为1kg的铁球与绳的下端连接，仍然使木块从静止开始向右运动（如右图），此时木块运动的加速度为 a右。问：a左与a右之间的大小关系是怎样的？A.a左=a右 B.a左>a右 C.a左<a右": 
-    """正确答案是B a左>a右。\n对于左图，木块所受的合外力为10N，使木块产生加速度；
+    """正确答案是B a左>a右。\n\n对于左图，木块所受的合外力为10N，使木块产生加速度；
 而右图的情况则不同，与木块相连的铁球自身也具有与木块加速度大小相同方向向下的加速度，由牛顿第二定律可知，其所受的重力大于绳子的拉力，则右图木块所受的合外力（等于绳的拉力）小于10N，因此右图中木块的加速度小于左图中木块的加速度。""",
     
     "3. 质量分别为2m、m的两个物体在光滑的水平面上相互接触。水平向右的力F施加在质量为2m的物体上（如左图）。现将力F作用在质量为m的物体上（如右图）。与左图相比，右图中两个物体之间的作用力会发生怎样的变化？A.保持不变 B.变大 C.变小": 
-    """正确答案是B变大。\n因为外力F大小不变，可以看出两系统的加速度大小相同，在左图中外力F只直接作用在质量为2m的物块上，没有直接作用在质量为m的物块上，所以质量为m的物块的加速度由质量为2m的物块对它的作用力提供，由此可以求出左图中两物块的相互作用力为 F / 3；
+    """正确答案是B变大。\n\n因为外力F大小不变，可以看出两系统的加速度大小相同，在左图中外力F只直接作用在质量为2m的物块上，没有直接作用在质量为m的物块上，所以质量为m的物块的加速度由质量为2m的物块对它的作用力提供，由此可以求出左图中两物块的相互作用力为 F / 3；
 同理右图中两物体间的相互作用力为 2F / 3，所以右图中两物体之间的作用力大于左图中两物体间的作用力。"""
 }
 
@@ -68,7 +68,7 @@ if student_id:
         # 添加新的结果
         new_result = {"时间": current_time, "题目": question_input, "答案": answer}
         new_result_df = pd.DataFrame([new_result])  # 将新结果转换为 DataFrame
-        results = pd.concat([results, new_result_df], ignore_index=True)  # 使用 pd.concat 来连接 DataFrame
+        results = pd.concat([results, new_result_df], ignore_index=True)  # 合并现有结果和新结果
         
         # 保存到文件
         save_results(results, student_id)
@@ -82,7 +82,7 @@ if student_id:
             csv_buffer = StringIO(csv_data)
             
             # 文件保存路径
-            export_path = r"D:\台式机桌面内容备份\Desktop\ChatGPT\+生成式人工智能\搜题app\results_{}.docx".format(student_id)
+            export_path = f"results_{student_id}.docx"
             
             # 将 CSV 内容写入 Word 文档
             doc = Document()
@@ -108,6 +108,6 @@ if student_id:
                 st.download_button(
                     label="下载 Word 文档",
                     data=f,
-                    file_name="results_{}.docx".format(student_id),
+                    file_name=f"results_{student_id}.docx",
                     mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                 )
